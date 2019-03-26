@@ -20,6 +20,9 @@ ap.add_argument("-n", "--name", required=True,
 args = vars(ap.parse_args())
 image = face_recognition.load_image_file(args["input_image"])
 face_encoding = face_recognition.face_encodings(image)[0]
-data = {'name': args["name"], 'encoding': [list(face_encoding)]}
-em_col.insert(data)
+if em_col.find_one({"name": args["name"]}) is not None:
+    em_col.update({'name': args["name"]}, {'$push': {'encoding': list(face_encoding)}})
+else:
+    data = {'name': args["name"], 'encoding': [list(face_encoding)]}
+    em_col.insert(data)
 
