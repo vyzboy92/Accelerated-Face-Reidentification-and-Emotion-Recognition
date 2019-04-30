@@ -25,7 +25,7 @@ def init_emotion():
     # Plugin initialization for specified device and load extensions library if specified
     plugin = IEPlugin(device='CPU')
     plugin.add_cpu_extension(
-        '/opt/intel/computer_vision_sdk/inference_engine/lib/ubuntu_16.04/intel64/libcpu_extension_sse4.so')
+        '/opt/intel/openvino/inference_engine/lib/intel64/libcpu_extension_sse4.so')
     log.info("Reading IR...")
     net = IENetwork(model=model_xml, weights=model_bin)
 
